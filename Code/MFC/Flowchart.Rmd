@@ -1,0 +1,46 @@
+---
+title: "Flowchart"
+author: "Rachel Havranek"
+date: "9/25/2018"
+output: html_document
+---
+
+I am creating a flowchart for how I want to approach this problem. I took this tact because I would like to learn how to ues Graphviz (in DiagrammeR) so that I can include flowcharts for a paper I am writing that will include a new workflow. 
+
+```{r, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(plotly)
+library(DiagrammeR)
+```
+This is the simplest flow chart, using the library mermaid inside DiagrammeR. You open the flow chart with " define which direction the flow chart should proceed and then tell it what connections to make
+```{r}
+mermaid(" 
+  graph TB 
+  A-->B
+"
+)
+```
+
+```{r}
+mermaid("graph LR; A-->B; A-->C") #You can also put semicolons between the objects and keep it all on one line 
+```
+
+Using brackets after the letter tells mermaid what text should be insdie the bubble. [] for square, () for rounded rectangel, (()) for circle, {} for a diamond, >] makes a flag
+```{r}
+mermaid("
+  graph TD
+  A[C++ basics]-->B[Note Code]
+        ")
+```
+
+```{r}
+mermaid ("
+         graph LR
+         A[C++ Basics]-->D[Comment on existing code]
+         B[Find examples of existing MFC code]-->D
+         C[Hunt down Sierra Instruments specifics]-->E[Use existing code and Sierra specifics to write my own code]
+         D-->E
+         ")
+```
+
