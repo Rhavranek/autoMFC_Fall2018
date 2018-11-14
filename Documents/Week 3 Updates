@@ -1,0 +1,44 @@
+## Week 3 Notes
+My goals of this week were to:
+1. learn some arduino language
+2. learn some MFC specifics
+
+# Arduino Workshop
+One thing I did this week was to go to an Arduino Workshop at the Blow Things Up lab in ATLAS.
+
+Things I learned about / ideas I got  in the workshop:
+- Some Arduino uno basics (what do the pins do, analog vs. digital, some basic wiring)
+- The second half of the workshop was just me and the BTU TA, so we talked through some specifics of my project!
+- Real Time Clock - a way to keep track of time so that I have precise sampling times. This would guard against power loss resets
+  components: https://learn.sparkfun.com/tutorials/deadon-rtc-breakout-hookup-guide#hardware-hookup
+    Sparkfun has an RTC library to go with this component - Sparkfun DS3234 Arduino library
+    This component would require that I learn soldering (there is a BTU workshop on this on Friday 10/19)
+  or! (but requires more hookup): https://www.sparkfun.com/products/540
+    I can use the Arduino RTC library https://www.arduino.cc/en/Reference/RTC
+  I'm leaning towards the former, because I would have to do less with battery hookups, etc.
+
+ key functions in the sparkfun library:
+  rtc.autoTime() - sets the RTC to my computer
+  rtc.update() - what time is it now?
+  setAlarm1(); - can be triggered by the second. e.g. setAlarm1 (19;15) triggers whenever the minute is 19 and 15 seconds (e.g. 03:19:15, 04:19:15)
+  setAlarm2(); -  can be triggered by the minute e.g. setAlarm2 (0, 30) triggers at midnight 30.
+  if (rtc.alarm1())
+    serial.println( "Alarm 1 is triggered!"); lets us monitor alarm 1
+
+Side note:
+- Eventually, I can use the RTC, paired with a transmitter, to set off an alarm to send me an SMS and let me know my system is running!
+
+ I could structure my code such that the alarm goes off, then use that as a way to bring everything up from sleep mode
+ Then use the arduino internal clock (which can be imprecise) for the MFC timing.
+ The alarm2 would trigger an SMS to tell me everything is running.
+
+
+# MFC characteristics
+I purchased a Sierra Instruments SmartTrak100. http://www.sierrainstruments.com/userfiles/file/datasheets/technical/100-datasheet.pdf?x=7781
+
+http://www.sierrainstruments.com/userfiles/file/manuals/100-quick-install-guide.pdf?x=374
+
+1. power requirements: 24 VDC +/- 1-% (500 mA regulated)
+2. Analog output 4 - 20 mA
+3. RS-232
+4. The second pdf I've linked has the pins that I can use for manual/analog changes.
