@@ -1,19 +1,19 @@
 void setup() {
   Serial.begin(9600); //baud rate of the computer 
   Serial1.begin(9600); // baud rate of the valcovalve
-  Serial1.println("HM"); //Moves the actuator to position 1. If the actuator is already in position 1, the command is ignored.
+  //Serial1.println("HM"); //Moves the actuator to position 1. If the actuator is already in position 1, the command is ignored.
   Serial.println("it should have moved home"); 
   delay (6000);
 }
 
 void loop() {
-  Serial.println("CW4"); //use serial println rather than serial.write because the VV speaks in characters not bits 
-  Serial1.println("CW4");
+  Serial.println("CW6"); //use serial println rather than serial.write because the VV speaks in characters not bits 
+  Serial1.println("CW6");
   //to run clockwise 4 is the amount of positions 
   delay(18000); 
   // delay 5 seconds 
-  Serial.println("CC2");
-  Serial1.println("CC2");
+  Serial.println("CC5");
+  Serial1.println("CC5");
   // to run clounter clockwise 4 positions 
   delay (18000);
   // delay 5 seconds 
