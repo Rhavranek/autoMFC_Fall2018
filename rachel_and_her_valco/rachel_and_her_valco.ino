@@ -21,7 +21,7 @@ void setup() {
   Serial.begin(115200); //Partical board and USB computer
   Serial1.begin(9600);  //Valco
   Serial2.begin(9600);  //MFC1
-  Serial3.begin(9600);  //MSF2
+  Serial3.begin(9600);  //MFC2
   
   while(Serial1.available()) {  //Cleaning out anything that might be sitting around in the serial
   char c = Serial1.read();
@@ -51,8 +51,8 @@ void loop () {
   
   if(!IdleMode){ // inverse logic for if statement. within this if statement, place all active commands to disable functions w/o turning off arduino
       CheckValcoValve();
-      CheckMFC1();
-      CheckMFC2();
+      MFC2setpoint();
+      MFC1setpoint();
    }
 
   Serial.print("ArduinoMainTimer=");Serial.print(timer);Serial.print(",InternalTimerInmsec="); Serial.println( millis()-internalnormalruntimer);

@@ -64,29 +64,47 @@ void get_data_from_serial(void){
           turnValveCounterClockwise(temp.toInt());
           Serial.println("I moved Counter Clockwise");
          }
+      }
            
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////MFC 1//////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
-       
-      }
+    
      if(getStringPartByNr(msg, ',', 0) == ("MFC1_Flow")) // example of how get a number from a string and call a function with it
       {
-       temp = (getStringPartByNr(msg, ',', 1));
-       msgholder=temp.toInt();
-       MFC1ChangeFlow(msgholder);
+        //read setpoint 
+       String cmnd = (getStringPartByNr(msg, ',', 1));
+       if (cmnd == "!Sinv") {
+          MFC1setpoint(cmnd)
+        }
+        // change setpoint 
+       if (cmnd == "?Sinv"){
+        temp = (getStringPartByNr(msg, ',',2));
+        temp = "?Sinv" + temp 
+        MFC1ChangeFlow(temp)
+        Serial.print(AddCRC(cmnd));
+        }
+      }
+     
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////MFC 2//////////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
-      }
-      if(getStringPartByNr(msg, ',', 0) == ("MFC2_Flow")) // example of how get a number from a string and call a function with it
+     if(getStringPartByNr(msg, ',', 0) == ("MFC2_Flow")) // example of how get a number from a string and call a function with it
       {
-       temp = (getStringPartByNr(msg, ',', 1));
-       msgholder=temp.toInt();
-       MFC2ChangeFlow(msgholder);
-            
+       String cmnd = (getStringPartByNr(msg, ',', 1));
+       if (cmnd == "!Sinv") {
+        Serial3.print (AddCRC(cmnd)); 
+        }
+       if (cmnd == "?Sinv"){
+        temp = (getStringPartByNr(msg, ',',2));
+        temp = "?Sinv" + temp
+        Serial.print(AddCRC(cmnd));
+        }
       }
+
+
+
       
 
     
