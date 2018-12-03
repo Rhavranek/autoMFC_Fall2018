@@ -1,8 +1,3 @@
-/*
- * A lot of this code comes from the RTC example code
- * Some of this code also comes from a code Brett/Sierra wrote to control the valco valve 
- */
-
 #include <SPI.h> //SPI library for RTC
 #include <SparkFunDS3234RTC.h> //RTC library 
 #define PRINT_USA_DATE //I'm an American chump, and I want my dates to look normal 
@@ -12,8 +7,7 @@
 void setup() {
   Serial.begin(9600); // use serial monitor to view outputs
   Serial1.begin(9600); // Valcovalve baud rate 
-  Serial1.println("HM"); // serial1 moves the valco Move actuator to position 1 
-  
+ 
 #ifdef INTERRUPT_PIN //
   pinMode(INTERRUPT_PIN, INPUT_PULLUP);
 #endif
@@ -21,7 +15,8 @@ void setup() {
 rtc.begin(DS13074_CS_PIN); // initailizes the library 
 rtc.update(); //Update time/date values, so we can set alarms 
 rtc.enableAlarmInterrupt(); //configures SQW pin as an interupt 
-rtc.setAlarm1(rtc.minute() + 1); //My hope is that this makes alarm 1 go off once a minute, it might go off every second. 
+rtc.setAlarm1(00, 5); //This alarm will go off when the seconds are 00 and the minute is 5 
+//rtc.setAlarm1(rtc.minute() + 1) 
  
 }
 
@@ -34,10 +29,15 @@ void loop() {
   {
 #endif
 
- if (rtc.alarm1()
-  { 
-      Serial1.println("CW4"); // moves the actuator in a clockwise motion to position 4 
-      Serial.println("The valco should have moved");
-  Serial1.println("CW6"); // move the acutuator to position 6 in a clockwise motion 
-
+ if (rtc.alarm1())
+    { 
+        Serial1.println("CW4"); // moves the actuator in a clockwise motion to position 4 
+        Serial.println("The valco should have moved to 4");
+        delay (5000); // delay 5 seconds 
+        Serial1.println("CC2"); // move the acutuator to position 6 in a clockwise motion 
+        Serial.println("The valco should have moved to 2");
+    }
+ #ifdef INTERRUPT_PIN
+  }
+  #endif
 }
