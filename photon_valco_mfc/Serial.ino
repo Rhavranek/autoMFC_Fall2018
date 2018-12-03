@@ -74,11 +74,11 @@ void get_data_from_serial(void){
       {
         //read setpoint 
        String cmnd = (getStringPartByNr(msg, ',', 1));
-       if (cmnd == "!Sinv") {
-          MFC1setpoint(cmnd)
+       if (temp == "!Sinv") {
+          MFC1setpoint(temp)
         }
         // change setpoint 
-       if (cmnd == "?Sinv"){
+       if (temp == "?Sinv"){
         temp = (getStringPartByNr(msg, ',',2));
         temp = "?Sinv" + temp 
         MFC1ChangeFlow(temp)
