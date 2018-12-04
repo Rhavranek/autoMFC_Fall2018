@@ -18,7 +18,7 @@ void CheckValcoValve(void){
 void turnValveCounterClockwise(int Valveposition)
 {
    Serial1.print("CC");
-   Serial1.println(Valveposition);//moves the valve down done number
+   Serial1.println(Valveposition);//moves the valve down one number
    Serial.print("To valco \"CC\"" );
    Serial.println(Valveposition);
 }
